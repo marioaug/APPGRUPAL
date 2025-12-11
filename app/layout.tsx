@@ -1,12 +1,14 @@
-import "./globals.css";
+// my-app/app/layout.tsx
 
+import { Providers } from './Providers'; // <-- ¡Añadir esta línea!
 
-export const metadata = {
-  title: "Mi tienda",
-  description: "Tienda con API y estado global",
-};
-
-export default function RootLayout({ children }) {
+// Tipifica children para Layouts
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) { // <-- Corregido: Tipificamos 'children'
+  // ... el código
   return (
     <html lang="es">
       <body>
@@ -17,4 +19,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-

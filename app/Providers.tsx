@@ -1,7 +1,12 @@
+// my-app/app/Providers.tsx
 'use client';
+import { CartProvider } from '../context/CartContext';
 
-import { CartProvider } from "../context/CartContext";
-
-export function Providers({ children }) {
-  return <CartProvider>{children}</CartProvider>;
+// Tipificamos los props, incluyendo children
+export function Providers({ children }: { children: React.ReactNode }) { // <-- Corregido: Tipificamos 'children'
+  return (
+    <CartProvider>
+      {children}
+    </CartProvider>
+  );
 }
