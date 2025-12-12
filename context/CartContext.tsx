@@ -1,70 +1,73 @@
-// my-app/context/CartContext.tsx
 'use client';
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-// --- Tipos de Datos ---
+// types
 export interface CartItem {
   id: number;
   title: string;
   price: number;
   quantity: number;
+  image?: string;
 }
 
 export interface ProductToAdd extends Omit<CartItem, 'quantity'> {}
 
-// --- Tipos del Contexto ---
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (product: ProductToAdd) => void;
   removeFromCart: (id: number) => void;
-  // Añade aquí más funciones si las necesitas
+
+  // lo que hace q se despliegue el carrito
+  isOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+  toggleCart: () => void;
 }
 
-// 1. Crear el Contexto, inicializado como 'undefined'
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// --- Componente Provider ---
-interface CartProviderProps {
-  children: ReactNode; // Corregido: tipificación de 'children'
-}
-
-export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Función corregida: tipifica el parámetro 'productToAdd'
-  const addToCart = (productToAdd: ProductToAdd) => {
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === productToAdd.id);
+  // añade al carrito
+  const addToCart = (product: ProductToAdd) => {
+    setCartItems(prev => {
+      const existing = prev.find(i => i.id === product.id);
 
-      if (existingItem) {
-        return prevItems.map(item =>
-          item.id === productToAdd.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+      if (existing) {
+        return prev.map(i =>
+          i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
         );
-      } else {
-        return [...prevItems, { ...productToAdd, quantity: 1 }];
       }
+
+      return [...prev, { ...product, quantity: 1 }];
     });
   };
 
   const removeFromCart = (id: number) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+    setCartItems(prev => prev.filter(i => i.id !== id));
   };
 
-  const contextValue: CartContextType = {
-    cartItems,
-    addToCart,
-    removeFromCart,
-  };
+  // ui control
+  const openCart = () => setIsOpen(true);
+  const closeCart = () => setIsOpen(false);
+  const toggleCart = () => setIsOpen(prev => !prev);
 
   return (
-    <CartContext.Provider value={contextValue}>
+    <CartContext.Provider value={{
+      cartItems,
+      addToCart,
+      removeFromCart,
+      isOpen,
+      openCart,
+      closeCart,
+      toggleCart
+    }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-// Exportamos el Contexto para que el hook pueda importarlo
 export default CartContext;

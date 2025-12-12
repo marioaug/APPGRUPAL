@@ -1,0 +1,32 @@
+.cartBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.3s;
+}
+
+.cartBtn:hover {
+  transform: scale(1.08);
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #e63946;
+  color: white;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 12px;
+}
