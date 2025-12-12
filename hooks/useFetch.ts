@@ -1,25 +1,40 @@
+// my-app/hooks/useFetch.ts
 'use client';
-import { useEffect, useState } from "react";
 
-export function useFetch(url) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+import { useState, useEffect } from 'react';
+
+interface FetchState<T> {
+  data: T | null;
+  loading: boolean;
+  error: any;
+}
+
+export const useFetch = <T>(url: string): FetchState<T> => {
+  const [state, setState] = useState<FetchState<T>>({
+    data: null,
+    loading: true,
+    error: null,
+  });
 
   useEffect(() => {
-    setLoading(true);
+    setState({ data: null, loading: true, error: null });
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err);
-        setLoading(false);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const json = await response.json();
+        // Le decimos a TypeScript que el resultado es de tipo T
+        setState({ data: json as T, loading: false, error: null });
+      } catch (error) {
+        setState({ data: null, loading: false, error });
+      }
+    };
+
+    fetchData();
   }, [url]);
 
-  return { data, loading, error };
-}
+  return state;
+};

@@ -1,26 +1,47 @@
 'use client';
 
 import { useFetch } from "../hooks/useFetch";
-import { useCart } from "../hooks/useCart";
+
+interface Product { 
+    id: number;
+    title: string;
+    price: number;
+    image: string;
+}
 
 export default function ProductList() {
-  const { data: products, loading } = useFetch("https://fakestoreapi.com/products");
-  const { addToCart } = useCart();
+    // URL de la API de la consigna
+    const { data: products, loading } = useFetch<Product[]>("https://fakestoreapi.com/products?limit=10");
+    // ...
 
-  if (loading) return <p>Cargando productos...</p>;
+    if (loading) {
+        return <div>Cargando productos...</div>; 
+    }
+
+    if (!products || products.length === 0) {
+    return <div>No hay productos.</div>;
+  }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-      {products?.map((product) => (
-        <div key={product.id} style={{ border: "1px solid #ccc", padding: 20 }}>
-          <img src={product.image} width={150} alt={product.title} />
-          <h3>{product.title}</h3>
-          <p>${product.price}</p>
-          <button onClick={() => addToCart(product)}>
-            Agregar al carrito
-          </button>
+  <div>
+    <h2>Productos</h2>
+
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+      {products.map(p => (
+        <div key={p.id} style={{ border: "1px solid #ccc", padding: 10 }}>
+          
+          <img
+            src={p.image}
+            alt={p.title}
+            style={{ width: "100%", height: 150, objectFit: "contain" }}
+          />
+
+          <h4>{p.title}</h4>
+          <p>${p.price}</p>
+
+          <button>Agregar al carrito</button>
         </div>
       ))}
     </div>
-  );
-}
+  </div>
+)};

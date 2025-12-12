@@ -1,14 +1,13 @@
 // my-app/app/layout.tsx
 
-import { Providers } from './Providers'; // <-- ¡Añadir esta línea!
+import { Providers } from './Providers'; 
 
 // Tipifica children para Layouts
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) { // <-- Corregido: Tipificamos 'children'
-  // ... el código
+}) { // Tipificamos
   return (
     <html lang="es">
       <body>

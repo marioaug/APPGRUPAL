@@ -1,12 +1,18 @@
+// my-app/hooks/useCart.ts
 'use client';
-import { CartProvider } from "../context/CartContext";
+
+// 1. Importar useContext
+import { useContext } from 'react';
+// 2. Importar CartContext 
+import CartContext from '../context/CartContext'; 
 
 export const useCart = () => {
-  const context = useContext(CartContext);
+    // 3. Usa useContext con el contexto importado
+    const ctx = useContext(CartContext); 
 
-  if (!context) {
-    throw new Error("useCart debe usarse dentro de un CartProvider");
-  }
+    if (!ctx) {
+        throw new Error("useCart debe usarse dentro de un CartProvider");
+    }
 
-  return context;
+    return ctx;
 };
