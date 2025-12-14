@@ -4,6 +4,7 @@ import './globals.css'
 import CartIcon from '@/components/CartIcon';
 import CartModal from '@/components/CartModal';
 import Footer from '@/components/Footer';
+import Navbar from '@/components/NavBar';
 
 // Tipifica children para Layouts
 export default function RootLayout({
@@ -15,6 +16,7 @@ export default function RootLayout({
    <html lang="es">
       <body>
         <CartProvider>
+          <Navbar />
           <CartIcon />
           <CartModal />
           {children}
