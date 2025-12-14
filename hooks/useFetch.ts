@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 interface FetchState<T> {
   data: T | null;
   loading: boolean;
-  error: any;
+  error: null,
 }
 
 export const useFetch = <T>(url: string): FetchState<T> => {

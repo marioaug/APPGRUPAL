@@ -1,7 +1,5 @@
 'use client';
 
-'use client';
-
 import { useCart } from "@/hooks/useCarts";
 import styles from "./CartModal.module.css";
 

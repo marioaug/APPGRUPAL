@@ -1,0 +1,48 @@
+/* creando footer */
+
+.footer {
+    background-color: #0f172a;
+    color: #e5e7eb;
+    padding: 3rem 1rem;
+    margin-top: auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+  gap: 2rem;
+  text-align: center;
+}
+
+.brand h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.brand p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: #38bdf8;
+}
+
+.copy {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}

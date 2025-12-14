@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, ReactNode } from 'react';
 
 // types
 export interface CartItem {
@@ -11,7 +11,7 @@ export interface CartItem {
   image?: string;
 }
 
-export interface ProductToAdd extends Omit<CartItem, 'quantity'> {}
+export type ProductToAdd = Omit<CartItem, 'quantity'>;
 
 interface CartContextType {
   cartItems: CartItem[];

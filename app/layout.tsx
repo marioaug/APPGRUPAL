@@ -1,9 +1,9 @@
 // my-app/app/layout.tsx
 import { CartProvider } from '@/context/CartContext';
 import './globals.css'
-import { Providers } from './Providers'; 
 import CartIcon from '@/components/CartIcon';
 import CartModal from '@/components/CartModal';
+import Footer from '@/components/Footer';
 
 // Tipifica children para Layouts
 export default function RootLayout({
@@ -19,6 +19,7 @@ export default function RootLayout({
           <CartModal />
           {children}
         </CartProvider>
+        <Footer />
       </body>
     </html>
   );
