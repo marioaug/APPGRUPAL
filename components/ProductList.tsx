@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { useCart } from "@/hooks/useCarts";
 import styles from "./ProductList.module.css";
+import Image from "next/image";
+import { FaFilter } from "react-icons/fa";
 
 interface Product { 
   id: number;
@@ -15,12 +17,12 @@ interface Product {
 
 export default function ProductList() {
   const { data: products, loading } = useFetch<Product[]>(
-    "https://fakestoreapi.com/products?limit=10"
+    "https://fakestoreapi.com/products?limit=15"
   );
   const { addToCart } = useCart();
 
   const [filter, setFilter] = useState("all");
-  const [open, setOpen] = useState(false); // ⬅ controla el menú
+  const [open, setOpen] = useState(false); // control de menu
 
   const categories = [
     { label: "Todas", value: "all" },
@@ -47,13 +49,15 @@ export default function ProductList() {
     <div className={styles.container}>
       <h1 className={styles.title}>Productos destacados</h1>
 
-      {/* ⭐ BOTÓN FILTER + DESPLEGABLE ⭐ */}
+    {/* filter desplegable */}
    <div className={styles.filterWrapper}>
   <button
     onClick={() => setOpen(!open)}
     className={styles.filterBtn}
   >
-    Filtrar ▼
+   <FaFilter className="w-5 h-5" />
+
+
   </button>
 
   {open && (
@@ -75,7 +79,12 @@ export default function ProductList() {
       <div className={styles.grid}>
         {filteredProducts.map((p) => (
           <div key={p.id} className={styles.card}>
-            <img src={p.image} alt={p.title} className={styles.image} />
+            <Image
+              src={p.image}
+              width={10}
+              height={10}
+              alt={p.title}
+              className={styles.image} />
             <h4 className={styles.productTitle}>{p.title}</h4>
             <p className={styles.price}>${p.price}</p>
 
