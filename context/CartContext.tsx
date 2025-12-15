@@ -1,8 +1,7 @@
-'use client';
+"use client";
 
-import { createContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode } from "react";
 
-// types
 export interface CartItem {
   id: number;
   title: string;
@@ -11,14 +10,13 @@ export interface CartItem {
   image?: string;
 }
 
-export type ProductToAdd = Omit<CartItem, 'quantity'>;
+export type ProductToAdd = Omit<CartItem, "quantity">;
 
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (product: ProductToAdd) => void;
   removeFromCart: (id: number) => void;
 
-  // lo que hace q se despliegue el carrito
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
@@ -31,13 +29,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  // añade al carrito
   const addToCart = (product: ProductToAdd) => {
-    setCartItems(prev => {
-      const existing = prev.find(i => i.id === product.id);
+    setCartItems((prev) => {
+      const existing = prev.find((i) => i.id === product.id);
 
       if (existing) {
-        return prev.map(i =>
+        return prev.map((i) =>
           i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
@@ -47,24 +44,25 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeFromCart = (id: number) => {
-    setCartItems(prev => prev.filter(i => i.id !== id));
+    setCartItems((prev) => prev.filter((i) => i.id !== id));
   };
 
-  // ui control
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
-  const toggleCart = () => setIsOpen(prev => !prev);
+  const toggleCart = () => setIsOpen((prev) => !prev);
 
   return (
-    <CartContext.Provider value={{
-      cartItems,
-      addToCart,
-      removeFromCart,
-      isOpen,
-      openCart,
-      closeCart,
-      toggleCart
-    }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        isOpen,
+        openCart,
+        closeCart,
+        toggleCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

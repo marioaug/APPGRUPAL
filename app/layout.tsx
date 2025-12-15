@@ -1,25 +1,28 @@
-// my-app/app/layout.tsx
-import { CartProvider } from '@/context/CartContext';
-import './globals.css'
-import CartIcon from '@/components/CartIcon';
-import CartModal from '@/components/CartModal';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/NavBar';
+import { CartProvider } from "@/context/CartContext";
+import "./globals.css";
+import CartIcon from "@/components/CartIcon";
+import CartModal from "@/components/CartModal";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/NavBar";
 
-// Tipifica children para Layouts
+export const metadata = {
+  title: "Base Market",
+  description: "E-commerce Next.js + React",
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) { // Tipificamos
+}) {
   return (
-   <html lang="es">
-      <body>
+    <html lang="es">
+      <body className="flex flex-col min-h-screen">
         <CartProvider>
           <Navbar />
           <CartIcon />
           <CartModal />
-          {children}
+          <div className="flex justify-center">{children}</div>
         </CartProvider>
         <Footer />
       </body>

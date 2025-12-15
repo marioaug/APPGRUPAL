@@ -29,7 +29,6 @@
   animation: fadeIn 0.3s;
 }
 
-/* como se mueve al cerrar el modal */
 .closeBtn {
   position: absolute;
   top: 10px;
@@ -66,7 +65,6 @@
     opacity: 1;
   }
 }
-/* boton delete  ubi*/
 .row {
   display: flex;
   justify-content: space-between;
@@ -83,7 +81,6 @@
   padding: 5px;
   transition: 0.2s;
 }
-/* para q se mueva cuando pasamos el mouse por encima */
 .remove:hover {
   transform: scale(1.2);
 }

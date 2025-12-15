@@ -26,7 +26,6 @@ export const useFetch = <T>(url: string): FetchState<T> => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const json = await response.json();
-        // Le decimos a TypeScript que el resultado es de tipo T
         setState({ data: json as T, loading: false, error: null });
       } catch (error) {
         setState({ data: null, loading: false, error });
