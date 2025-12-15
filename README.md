@@ -31,7 +31,7 @@ carrito de compras y navegación entre páginas.
 
 - Gerardo Vallomer
 - Mario Ballester  
-- Axel
+- Axel Leguero
 - Nahir Bravo
 
 -----------------------
